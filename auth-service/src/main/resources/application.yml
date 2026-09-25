@@ -16,3 +16,10 @@ spring:
     hibernate:
       # Flyway creates and changes tables; Hibernate only checks that entities match them.
       ddl-auto: validate
+
+infinityhr:
+  bootstrap:
+    admin:
+      username: superadmin
+      email: superadmin@infinityhr.local
+      password: ${BOOTSTRAP_ADMIN_PASSWORD:}
