@@ -1,0 +1,14 @@
+# Shared configuration served by config-server to EVERY service that connects to it.
+# Settings only one service needs belong in <service-name>.yml next to this file.
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+spring:
+  jpa:
+    # Keep DB sessions out of the web layer; load what you need inside the service method.
+    open-in-view: false

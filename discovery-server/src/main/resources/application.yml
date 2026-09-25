@@ -1,0 +1,12 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: discovery-server
+
+eureka:
+  client:
+    # This IS the registry, so it should not register with or fetch from itself.
+    register-with-eureka: false
+    fetch-registry: false

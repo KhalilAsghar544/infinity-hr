@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- The root inherits Spring Boot's parent, and every module inherits from this root.
+         That way Spring Boot / Spring Cloud versions are declared exactly once. -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.1</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.infinityhr</groupId>
+    <artifactId>infinity-hr</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>infinity-hr</name>
+
+    <properties>
+        <java.version>17</java.version>
+        <spring-cloud.version>2025.1.3</spring-cloud.version>
+    </properties>
+
+    <modules>
+        <module>common-lib</module>
+        <module>discovery-server</module>
+        <module>config-server</module>
+        <module>api-gateway</module>
+        <module>auth-service</module>
+        <module>employee-service</module>
+        <module>attendance-service</module>
+        <module>leave-service</module>
+        <module>payroll-service</module>
+        <module>notification-service</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Services can depend on common-lib without repeating its version. -->
+            <dependency>
+                <groupId>com.infinityhr</groupId>
+                <artifactId>common-lib</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <!-- Lombok's annotation processor, configured once for every module. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

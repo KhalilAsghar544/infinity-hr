@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  config:
+    # "optional:" means the gateway still starts if config-server is not running.
+    import: "optional:configserver:http://localhost:8888"
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          # lb://<name> asks Eureka for a running instance of that service.
+          routes:
+            - id: auth-service
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/auth/**
+            - id: employee-service
+              uri: lb://employee-service
+              predicates:
+                - Path=/api/employees/**, /api/departments/**
+            - id: attendance-service
+              uri: lb://attendance-service
+              predicates:
+                - Path=/api/attendance/**
+            - id: leave-service
+              uri: lb://leave-service
+              predicates:
+                - Path=/api/leaves/**
+            - id: payroll-service
+              uri: lb://payroll-service
+              predicates:
+                - Path=/api/payroll/**
+            - id: notification-service
+              uri: lb://notification-service
+              predicates:
+                - Path=/api/notifications/**
