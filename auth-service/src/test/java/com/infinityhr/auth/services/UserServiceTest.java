@@ -10,7 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Set;
@@ -31,6 +34,14 @@ public class UserServiceTest {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @TestConfiguration
+    static class TestConfig {
+        @Bean
+        PasswordEncoder passwordEncoder() {
+            return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        }
+    }
 
     @Test
     void passwordIsStoredAsBcryptHashNotPlainText() {
