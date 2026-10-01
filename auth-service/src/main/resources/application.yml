@@ -23,3 +23,8 @@ infinityhr:
       username: superadmin
       email: superadmin@infinityhr.local
       password: ${BOOTSTRAP_ADMIN_PASSWORD:}
+  jwt:
+    issuer: infinity-hr-auth
+    access-token-ttl: 15m
+    private-key: ${JWT_PRIVATE_KEY_LOCATION:file:${user.home}/.infinityhr/keys/private.pem}
+    public-key: ${JWT_PUBLIC_KEY_LOCATION:file:${user.home}/.infinityhr/keys/public.pem}
