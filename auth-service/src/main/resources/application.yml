@@ -16,6 +16,7 @@ spring:
     hibernate:
       # Flyway creates and changes tables; Hibernate only checks that entities match them.
       ddl-auto: validate
+      format_sql: true
 
 infinityhr:
   bootstrap:
@@ -28,3 +29,7 @@ infinityhr:
     access-token-ttl: 15m
     private-key: ${JWT_PRIVATE_KEY_LOCATION:file:${user.home}/.infinityhr/keys/private.pem}
     public-key: ${JWT_PUBLIC_KEY_LOCATION:file:${user.home}/.infinityhr/keys/public.pem}
+logging:
+  level:
+    org.springframework.security: TRACE
+    org.hibernate.SQL: DEBUG
