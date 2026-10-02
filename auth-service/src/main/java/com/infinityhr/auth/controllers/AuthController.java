@@ -33,7 +33,7 @@ public class AuthController {
                 jwt.getSubject(),
                 jwt.getClaimAsString("username"),
                 jwt.getClaimAsString("employeeId"),
-                jwt.getClaimAsStringList("permisions"),
+                jwt.getClaimAsStringList("permissions"),
                 jwt.getExpiresAt()
         );
     }
